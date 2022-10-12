@@ -1,0 +1,54 @@
+package br.com.residencia.biblioteca.entity;
+
+import java.time.Instant;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "id_filme")
+
+@Entity
+@Table(name="filme")
+public class Filme {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_filme")
+	private Integer id_filme;
+	
+	@Column(name="nome_br")
+	private String nome_br;
+	
+	@Column(name="nome_en")
+	private String nome_en;
+	
+	@Column(name="ano_lancamento")
+	private Instant ano_lancamento;
+	
+	@Column(name="sinopse")
+	private String sinopse;
+	
+	@OneToOne
+	@JoinColumn(name= "id_diretor",referencedColumnName="id_diretor")
+	private Diretor diretor;
+	
+	@OneToOne
+	@JoinColumn(name= "id_genero",referencedColumnName="id_genero")
+	private Genero genero;
+	
+	
+	
+	
+	
+
+}
